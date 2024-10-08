@@ -31,12 +31,12 @@
       const phone = document.getElementById('phone').value;
       const linkedin = document.getElementById('linkedin').value;
       const address = document.getElementById('address').value;
-      const gpayLink = 'https://pay.google.com/gp/p/ui/pay?pa=adnanmuhammad4393@okicici&pn=Adnan+Muhammad&am=99&tn=Comicfix+Ollo+Challenge';
+      // Updated UPI link for payment
+      const upiLink = 'upi://pay?pa=adnanmuhammad4393@okicici&pn=Adnan+Muhammad&am=99&tn=Comicfix+Ollo+Challenge';
       const whatsappMessage = `Name: ${name}, Phone: ${phone}, LinkedIn: ${linkedin}, Address: ${address}`;
-      window.open(gpayLink, '_blank');
+      window.open(upiLink, '_blank');
       window.open(`https://wa.me/9656778508?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     });
   </script>
 </body>
 </html>
-  
