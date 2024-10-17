@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Masterclass Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #6b5b95;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #5a4d82;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+        #paymentPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center text-primary">Register for the Prompt Engineering Masterclass</h2>
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Full Name:</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn Profile:</label>
+                    <input type="url" class="form-control" id="linkedin" required>
+                </div>
+                <div class="form-group">
+                    <label for="github"><i class="fab fa-github"></i> GitHub Profile:</label>
+                    <input type="url" class="form-control" id="github" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email ID:</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="location"><i class="fas fa-map-marker-alt"></i> Location:</label>
+                    <input type="text" class="form-control" id="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="donation"><i class="fas fa-donate"></i> Small Donation (₹29):</label>
+                    <input type="text" class="form-control" value="29" readonly>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="processPayment()">
+                    <i class="fas fa-wallet"></i> Donate via UPI
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div id="paymentPopup">
+        <h4>Payment Successful!</h4>
+        <p>Thank you for your donation of ₹29. Your registration is complete!</p>
+        <button class="btn btn-success" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        function processPayment() {
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const linkedin = document.getElementById("linkedin").value;
+            const github = document.getElementById("github").value;
+            const email = document.getElementById("email").value;
+            const location = document.getElementById("location").value;
+            const amount = 29; // Donation amount
+            const upiId = "adnanmuhammad4393@okicici";
+            const message = `Registration for Prompt Engineering Masterclass. Name: ${name}, Phone: ${phone}, LinkedIn: ${linkedin}, GitHub: ${github}, Email: ${email}, Location: ${location}`;
+
+            // Create UPI deep link
+            const upiLink = `upi://pay?pa=${upiId}&pn=Adnan Muhammad&mc=1234&tid=1234567890&am=${amount}&cu=INR&tn=${encodeURIComponent(message)}`;
+
+            // Open UPI app with the payment details
+            window.location.href = upiLink;
+
+            // Simulate payment success after a delay (you can remove this for actual implementation)
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'block';
+                document.getElementById('paymentPopup').style.display = 'block';
+                sendToWhatsApp(name, phone, linkedin, github, email, location); // Call to send data after payment
+            }, 2000); // Simulating delay for payment confirmation
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('paymentPopup').style.display = 'none';
+        }
+
+        function sendToWhatsApp(name, phone, linkedin, github, email, location) {
+            const whatsappNumber = "9656778508";
+            const message = `*Registration for Prompt Engineering Masterclass*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*LinkedIn:* ${linkedin}\n*GitHub:* ${github}\n*Email:* ${email}\n*Location:* ${location}\n*Donation:* ₹29`;
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+
+            // Redirect to WhatsApp to send the message
+            window.open(whatsappLink, '_blank');
+        }
+    </script>
+</body>
+</html>
