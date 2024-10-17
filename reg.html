@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* Add your CSS styles here */
         body {
             background-color: #f9f9f9;
             font-family: 'Arial', sans-serif;
@@ -36,13 +37,27 @@
         .btn-success:hover {
             background-color: #7a9d43;
         }
-        @media (max-width: 768px) {
-            .form-container {
-                padding: 20px;
-            }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
         }
-        .icon {
-            margin-right: 10px;
+        #paymentPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -52,41 +67,48 @@
         <div class="form-container">
             <form id="registrationForm">
                 <div class="form-group">
-                    <label for="name"><i class="fas fa-user icon"></i> Full Name:</label>
+                    <label for="name"><i class="fas fa-user"></i> Full Name:</label>
                     <input type="text" class="form-control" id="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone"><i class="fas fa-phone icon"></i> Phone Number:</label>
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number:</label>
                     <input type="tel" class="form-control" id="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="linkedin"><i class="fab fa-linkedin icon"></i> LinkedIn Profile:</label>
+                    <label for="linkedin"><i class="fab fa-linkedin"></i> LinkedIn Profile:</label>
                     <input type="url" class="form-control" id="linkedin" required>
                 </div>
                 <div class="form-group">
-                    <label for="github"><i class="fab fa-github icon"></i> GitHub Profile:</label>
+                    <label for="github"><i class="fab fa-github"></i> GitHub Profile:</label>
                     <input type="url" class="form-control" id="github" required>
                 </div>
                 <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope icon"></i> Email ID:</label>
+                    <label for="email"><i class="fas fa-envelope"></i> Email ID:</label>
                     <input type="email" class="form-control" id="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="location"><i class="fas fa-map-marker-alt icon"></i> Location:</label>
+                    <label for="location"><i class="fas fa-map-marker-alt"></i> Location:</label>
                     <input type="text" class="form-control" id="location" required>
                 </div>
                 <div class="form-group">
-                    <label for="donation"><i class="fas fa-donate icon"></i> Small Donation (₹29):</label>
+                    <label for="donation"><i class="fas fa-donate"></i> Small Donation (₹29):</label>
                     <input type="text" class="form-control" value="29" readonly>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="donate()">
-                    <i class="fas fa-wallet icon"></i> Donate via UPI
+                    <i class="fas fa-wallet"></i> Donate via UPI
                 </button>
                 <button type="submit" class="btn btn-success">
-                    <i class="fas fa-paper-plane icon"></i> Register
+                    <i class="fas fa-paper-plane"></i> Register
                 </button>
             </form>
         </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div id="paymentPopup">
+        <h4>Payment Successful!</h4>
+        <p>Thank you for your donation of ₹29. Your registration is complete!</p>
+        <button class="btn btn-success" onclick="closePopup()">Close</button>
     </div>
 
     <script>
@@ -99,10 +121,51 @@
             window.location.href = `upi://pay?pa=${upiId}&pn=Adnan Muhammad&mc=1234&tid=1234567890&am=${amount}&cu=INR&tn=${message}`;
         }
 
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('paymentPopup').style.display = 'none';
+        }
+
         document.getElementById("registrationForm").onsubmit = function(e) {
-            e.preventDefault(); // Prevent form submission for demo
-            alert("Registration submitted!"); // Replace with actual form submission logic
-            // Implement your form submission logic here (e.g., send data to a server)
+            e.preventDefault(); // Prevent the default form submission
+
+            // Show payment popup
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('paymentPopup').style.display = 'block';
+
+            // Prepare form data
+            const formData = {
+                name: document.getElementById("name").value,
+                phone: document.getElementById("phone").value,
+                linkedin: document.getElementById("linkedin").value,
+                github: document.getElementById("github").value,
+                email: document.getElementById("email").value,
+                location: document.getElementById("location").value,
+                donation: 29
+            };
+
+            // Send data to the backend
+            fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    alert("Registration successful!");
+                    closePopup();
+                    document.getElementById("registrationForm").reset(); // Reset the form
+                } else {
+                    alert("Error during registration. Please try again.");
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert("Error during registration. Please try again.");
+            });
         };
     </script>
 </body>
