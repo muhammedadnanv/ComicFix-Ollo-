@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Masterclass Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #6b5b95;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #5a4d82;
+        }
+        .btn-success {
+            background-color: #88b04b;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #7a9d43;
+        }
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+        .icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center text-primary">Register for the Prompt Engineering Masterclass</h2>
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user icon"></i> Full Name:</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone icon"></i> Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="linkedin"><i class="fab fa-linkedin icon"></i> LinkedIn Profile:</label>
+                    <input type="url" class="form-control" id="linkedin" required>
+                </div>
+                <div class="form-group">
+                    <label for="github"><i class="fab fa-github icon"></i> GitHub Profile:</label>
+                    <input type="url" class="form-control" id="github" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope icon"></i> Email ID:</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="location"><i class="fas fa-map-marker-alt icon"></i> Location:</label>
+                    <input type="text" class="form-control" id="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="donation"><i class="fas fa-donate icon"></i> Small Donation (₹29):</label>
+                    <input type="text" class="form-control" value="29" readonly>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="donate()">
+                    <i class="fas fa-wallet icon"></i> Donate via UPI
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-paper-plane icon"></i> Register
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function donate() {
+            const upiId = "adnanmuhammad4393@okicici";
+            const amount = 29;
+            const message = "Donation for Prompt Engineering Masterclass";
+
+            // Open UPI app with the donation details
+            window.location.href = `upi://pay?pa=${upiId}&pn=Adnan Muhammad&mc=1234&tid=1234567890&am=${amount}&cu=INR&tn=${message}`;
+        }
+
+        document.getElementById("registrationForm").onsubmit = function(e) {
+            e.preventDefault(); // Prevent form submission for demo
+            alert("Registration submitted!"); // Replace with actual form submission logic
+            // Implement your form submission logic here (e.g., send data to a server)
+        };
+    </script>
+</body>
+</html>
