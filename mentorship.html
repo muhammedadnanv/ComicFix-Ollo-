@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Prompt Developer Mentorship Program</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Reset background to white */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .program-info {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .donation-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .donation-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Program Details */
+        .program-details {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .program-details h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .program-details p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .program-details ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .program-details ul li {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Main Content -->
+<div class="container">
+    <h2>AI-Powered Prompt Developer Mentorship Program</h2>
+    <p class="program-info">
+        Join our **AI-Powered Prompt Developer Mentorship Program** to master prompt engineering and AI integrations. 
+        Our expert mentors will guide you through building real-world AI projects, helping you leverage AI tools for programming, coding, and development.
+    </p>
+
+    <!-- Program Details Section -->
+    <div class="program-details">
+        <h3>Program Overview</h3>
+        <p>This program is designed for aspiring developers who want to unlock the potential of AI in their development process. You will learn how to create high-quality prompts for GPT models, integrate them into your applications, and gain a deep understanding of AI and machine learning technologies.</p>
+
+        <h3>What You Will Learn:</h3>
+        <ul>
+            <li>AI-Powered Prompt Engineering: Crafting effective prompts for AI applications.</li>
+            <li>Integration of GPT and other AI tools into your development workflow.</li>
+            <li>Building and deploying AI-driven applications.</li>
+            <li>Optimizing your AI models for better performance and results.</li>
+            <li>Real-world projects and mentorship to enhance your portfolio.</li>
+        </ul>
+
+        <h3>Program Benefits:</h3>
+        <ul>
+            <li>Personalized 1-on-1 mentorship with industry experts.</li>
+            <li>Access to exclusive AI development resources and tools.</li>
+            <li>Work on real-world AI projects to build your portfolio.</li>
+            <li>Networking opportunities with top AI professionals.</li>
+            <li>Certificate of Completion to showcase your expertise.</li>
+        </ul>
+
+        <h3>Program Duration:</h3>
+        <p>The mentorship program runs for **8 weeks**, with weekly sessions, hands-on projects, and regular feedback from mentors.</p>
+
+        <h3>Eligibility:</h3>
+        <ul>
+            <li>Basic knowledge of programming (JavaScript, Python, etc.).</li>
+            <li>An interest in AI, machine learning, and automation.</li>
+            <li>Commitment to the full 8-week program.</li>
+        </ul>
+    </div>
+
+    <!-- Application Form -->
+    <h3>Apply for the Mentorship Program</h3>
+    <form id="application-form" action="https://wa.me/9656778508" method="get" target="_blank">
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="motivation" class="form-label">Why do you want to join this program?</label>
+            <textarea class="form-control" id="motivation" name="motivation" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="skills" class="form-label">What skills do you hope to develop?</label>
+            <input type="text" class="form-control" id="skills" name="skills" required>
+        </div>
+
+        <!-- Donation Info -->
+        <div class="text-center">
+            <button type="button" class="donation-btn" onclick="showDonationPopup()">Donate ₹599 to Apply</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+    </form>
+</div>
+
+<!-- Donation Popup -->
+<div id="donation-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h4>Donation Required: ₹599</h4>
+        <p>To access the mentorship program, you must donate ₹599. This helps us sustain and run these programs for aspiring developers.</p>
+        <p>Please make your donation using the UPI ID below:</p>
+        <p><strong>UPI ID: <a href="upi://pay?pa=adnanmuhammad4393@okicici&pn=AI%20Prompt%20Developer&mc=1234&tid=1234567890&am=599&cu=INR" target="_blank">adnanmuhammad4393@okicici</a></strong></p>
+        <br>
+        <p>After donating, submit your application form. Thank you for supporting us!</p>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    function showDonationPopup() {
+        document.getElementById("donation-popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("donation-popup").style.display = "none";
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
